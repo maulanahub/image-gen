@@ -15,6 +15,7 @@ import {
   HAIR_OPTIONS,
   EXPRESSION_OPTIONS,
   PRODUCT_CATEGORIES,
+  PRODUCT_CATEGORIES_GROUPED,
   INTERACTION_TYPE,
   POSE_OPTIONS,
   ENVIRONMENT_OPTIONS,
@@ -243,7 +244,13 @@ const App: React.FC = () => {
                   onChange={(e) => setProductConfig({ ...productConfig, category: e.target.value })}
                   className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer"
                 >
-                  {PRODUCT_CATEGORIES.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+                  {PRODUCT_CATEGORIES_GROUPED.map(group => (
+                    <optgroup key={group.label} label={group.label}>
+                      {group.options.map(opt => (
+                        <option key={opt} value={opt}>{opt}</option>
+                      ))}
+                    </optgroup>
+                  ))}
                 </select>
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -367,7 +374,7 @@ const App: React.FC = () => {
             <button
               onClick={handleGenerate}
               disabled={isGenerating}
-              className={`w-full py-5 px-8 rounded-3xl font-black text-lg transition-all flex items-center justify-center space-x-3 shadow-2xl ${isGenerating ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700 active:scale-[0.98] shadow-blue-200'}`}
+              className={`w-full py-5 px-8 rounded-3xl font-black text-lg transition-all flex items-center justify-center space-x-3 ${isGenerating ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700 active:scale-[0.98] shadow-blue-200'}`}
             >
               {isGenerating ? (
                 <>

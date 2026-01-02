@@ -1,30 +1,49 @@
 
 import React from 'react';
 
-export const GENDER_OPTIONS = ["Wanita", "Pria", "Anak-anak", "Non-biner"];
+export const GENDER_OPTIONS = ["Wanita", "Pria"];
 export const AGE_OPTIONS = ["Balita", "Anak-anak", "Remaja", "Dewasa Muda", "Dewasa", "Paruh Baya", "Lansia"];
 export const ETHNICITY_OPTIONS = ["Asia Tenggara", "Asia Timur", "Kaukasia", "Afrika", "Hispanik", "Timur Tengah", "Asia Selatan", "Campuran"];
 export const HAIR_OPTIONS = ["Pendek", "Sedang", "Panjang", "Keriting", "Lurus", "Wavy", "Botak", "Kuncir Kuda", "Buzz Cut", "Hijab", "Turban"];
 export const EXPRESSION_OPTIONS = ["Senyum Ramah", "Percaya Diri", "Netral/Profesional", "Spontan/Tertawa", "Serius/Fashion", "Menikmati (Mata Tertutup)", "Fokus", "Terkejut Senang"];
 
-export const PRODUCT_CATEGORIES = [
-  // Fashion & Accessories
-  "Kaos (T-Shirt)", "Hoodie/Sweater", "Jaket/Outer", "Gaun (Dress)", "Celana Jeans", "Sepatu Sneakers", "Sepatu Formal", "Tas Tangan", "Ransel", "Jam Tangan", "Kacamata", "Perhiasan (Kalung/Cincin)", "Topi",
-  // Electronics & Gadgets
-  "Smartphone", "Laptop", "Headphone", "Earbuds/TWS", "Kamera", "Smartwatch", "Tablet", "Speaker Portable",
-  // Beauty & Personal Care
-  "Botol Skincare/Serum", "Lipstik/Gincu", "Palet Makeup", "Botol Parfum", "Shampo/Sabun", "Lilin Aromaterapi",
-  // Food & Culinary
-  "Burger/Sandwich", "Sushi/Jepang", "Pizza", "Steak/Daging", "Ramen/Mie", "Salad Bowl", "Kue/Pastry", "Donat", "Nasi Goreng",
-  // Beverages
-  "Kopi/Latte", "Teh/Matcha", "Minuman Kaleng", "Jus Buah", "Botol Air Mineral", "Minuman Boba", "Cocktail/Mocktail",
-  // Home & Decor
-  "Mug/Gelas", "Vas Bunga", "Buku Catatan", "Lampu Meja", "Bantal Sofa", "Tanaman Hias",
-  // Sports & Hobbies
-  "Dumbbell/Alat Gym", "Matras Yoga", "Raket", "Bola", "Botol Minum Olahraga", "Sepeda",
-  // Toys & Kids
-  "Boneka", "Mobil-mobilan", "Blok Bangunan", "Buku Mewarnai"
+export const PRODUCT_CATEGORIES_GROUPED = [
+  {
+    label: "Fashion & Accessories",
+    options: ["Kaos (T-Shirt)", "Hoodie/Sweater", "Jaket/Outer", "Gaun (Dress)", "Celana Jeans", "Sepatu Sneakers", "Sepatu Formal", "Tas Tangan", "Ransel", "Jam Tangan", "Kacamata", "Perhiasan (Kalung/Cincin)", "Topi"]
+  },
+  {
+    label: "Electronics & Gadgets",
+    options: ["Smartphone", "Laptop", "Headphone", "Earbuds/TWS", "Kamera", "Smartwatch", "Tablet", "Speaker Portable"]
+  },
+  {
+    label: "Beauty & Personal Care",
+    options: ["Botol Skincare/Serum", "Lipstik/Gincu", "Palet Makeup", "Botol Parfum", "Shampo/Sabun", "Lilin Aromaterapi"]
+  },
+  {
+    label: "Food & Culinary",
+    options: ["Burger/Sandwich", "Sushi/Jepang", "Pizza", "Steak/Daging", "Ramen/Mie", "Salad Bowl", "Kue/Pastry", "Donat", "Nasi Goreng"]
+  },
+  {
+    label: "Beverages",
+    options: ["Kopi/Latte", "Teh/Matcha", "Minuman Kaleng", "Jus Buah", "Botol Air Mineral", "Minuman Boba", "Cocktail/Mocktail"]
+  },
+  {
+    label: "Home & Decor",
+    options: ["Mug/Gelas", "Vas Bunga", "Buku Catatan", "Lampu Meja", "Bantal Sofa", "Tanaman Hias"]
+  },
+  {
+    label: "Sports & Hobbies",
+    options: ["Dumbbell/Alat Gym", "Matras Yoga", "Raket", "Bola", "Botol Minum Olahraga", "Sepeda"]
+  },
+  {
+    label: "Toys & Kids",
+    options: ["Boneka", "Mobil-mobilan", "Blok Bangunan", "Buku Mewarnai"]
+  }
 ];
+
+// Flat array for initial values and logic
+export const PRODUCT_CATEGORIES = PRODUCT_CATEGORIES_GROUPED.flatMap(group => group.options);
 
 export const INTERACTION_TYPE = [
   "Memakai/Mengenakan",
