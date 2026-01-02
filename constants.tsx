@@ -9,7 +9,7 @@ export const EXPRESSION_OPTIONS = ["Senyum Ramah", "Percaya Diri", "Netral/Profe
 
 export const PRODUCT_CATEGORIES = [
   // Fashion & Accessories
-  "Kaus (T-Shirt)", "Hoodie/Sweater", "Jaket/Outer", "Gaun (Dress)", "Celana Jeans", "Sepatu Sneakers", "Sepatu Formal", "Tas Tangan", "Ransel", "Jam Tangan", "Kacamata", "Perhiasan (Kalung/Cincin)", "Topi",
+  "Kaos (T-Shirt)", "Hoodie/Sweater", "Jaket/Outer", "Gaun (Dress)", "Celana Jeans", "Sepatu Sneakers", "Sepatu Formal", "Tas Tangan", "Ransel", "Jam Tangan", "Kacamata", "Perhiasan (Kalung/Cincin)", "Topi",
   // Electronics & Gadgets
   "Smartphone", "Laptop", "Headphone", "Earbuds/TWS", "Kamera", "Smartwatch", "Tablet", "Speaker Portable",
   // Beauty & Personal Care
@@ -41,25 +41,25 @@ export const INTERACTION_TYPE = [
 ];
 
 export const POSE_OPTIONS = [
-  "Berdiri Tegak", 
-  "Duduk Santai", 
-  "Berjalan", 
-  "Dekat Wajah", 
-  "Flatlay dengan Tangan", 
-  "Candid/Spontan", 
+  "Berdiri Tegak",
+  "Duduk Santai",
+  "Berjalan",
+  "Dekat Wajah",
+  "Flatlay dengan Tangan",
+  "Candid/Spontan",
   "Headshot (Fokus Wajah)",
   "Action Shot",
   "Close-up Tangan"
 ];
 
 export const ENVIRONMENT_OPTIONS = [
-  "Studio Bersih (Putih)", 
-  "Studio Minimalis Krem", 
-  "Kafe Modern", 
-  "Urban/Jalanan Kota", 
-  "Taman/Outdoor", 
-  "Interior Mewah", 
-  "Kantor Modern", 
+  "Studio Bersih (Putih)",
+  "Studio Minimalis Krem",
+  "Kafe Modern",
+  "Urban/Jalanan Kota",
+  "Taman/Outdoor",
+  "Interior Mewah",
+  "Kantor Modern",
   "Tepi Pantai",
   "Dapur Estetik",
   "Gym/Pusat Kebugaran",
@@ -78,7 +78,7 @@ export const ASPECT_RATIOS: { label: string; value: string }[] = [
 ];
 
 export const RESOLUTION_OPTIONS: { label: string; value: string }[] = [
-    { label: "Standar (1K)", value: "1K" },
-    { label: "Definisi Tinggi (2K)", value: "2K" },
-    { label: "Profesional (4K)", value: "4K" },
+  { label: "Standar (1K)", value: "1K" },
+  { label: "Definisi Tinggi (2K)", value: "2K" },
+  { label: "Profesional (4K)", value: "4K" },
 ];

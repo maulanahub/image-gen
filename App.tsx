@@ -1,18 +1,18 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  ModelConfig, 
-  ProductConfig, 
-  SceneConfig, 
-  GeneratedImage, 
-  AspectRatio, 
-  ImageSize 
+import {
+  ModelConfig,
+  ProductConfig,
+  SceneConfig,
+  GeneratedImage,
+  AspectRatio,
+  ImageSize
 } from './types';
-import { 
-  GENDER_OPTIONS, 
-  AGE_OPTIONS, 
-  ETHNICITY_OPTIONS, 
-  HAIR_OPTIONS, 
+import {
+  GENDER_OPTIONS,
+  AGE_OPTIONS,
+  ETHNICITY_OPTIONS,
+  HAIR_OPTIONS,
   EXPRESSION_OPTIONS,
   PRODUCT_CATEGORIES,
   INTERACTION_TYPE,
@@ -55,25 +55,25 @@ const App: React.FC = () => {
   const handleGenerate = async () => {
     setIsGenerating(true);
     setError(null);
-    
+
     try {
       const prompt = generateImagePrompt(modelConfig, productConfig, sceneConfig, !!sourceImage);
       const imageUrl = await callGenerateImage(
-        prompt, 
-        sceneConfig.aspectRatio, 
-        sceneConfig.resolution, 
+        prompt,
+        sceneConfig.aspectRatio,
+        sceneConfig.resolution,
         sourceImage || undefined
       );
-      
-      const newImage: GeneratedImage = { 
-        url: imageUrl, 
-        prompt: prompt, 
-        timestamp: Date.now() 
+
+      const newImage: GeneratedImage = {
+        url: imageUrl,
+        prompt: prompt,
+        timestamp: Date.now()
       };
-      
+
       setGeneratedImages(prev => [newImage, ...prev]);
       setCurrentImageIndex(0);
-      
+
       if (window.innerWidth < 1024) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
@@ -95,9 +95,9 @@ const App: React.FC = () => {
 
   const [productConfig, setProductConfig] = useState<ProductConfig>({
     category: PRODUCT_CATEGORIES[0],
-    description: "Kualitas premium, desain modern",
-    color: "Warna Alami",
-    material: "Material Standar",
+    description: "",
+    color: "",
+    material: "",
   });
 
   const [sceneConfig, setSceneConfig] = useState<SceneConfig>({
@@ -141,27 +141,27 @@ const App: React.FC = () => {
                 </div>
               ) : generatedImages.length > 0 ? (
                 <div className="relative group max-h-full">
-                   <img 
-                    src={generatedImages[currentImageIndex].url} 
-                    alt="Hasil AI" 
+                  <img
+                    src={generatedImages[currentImageIndex].url}
+                    alt="Hasil AI"
                     className="max-h-[80vh] w-auto object-contain rounded-xl shadow-2xl mx-auto"
                   />
-                   <div className="absolute bottom-6 right-6 flex space-x-3">
-                      <button 
-                        onClick={() => {
-                          const link = document.createElement('a');
-                          link.href = generatedImages[currentImageIndex].url;
-                          link.download = `modelgen-${Date.now()}.png`;
-                          link.click();
-                        }} 
-                        className="bg-white/95 backdrop-blur-md p-4 rounded-2xl text-blue-600 hover:bg-blue-600 hover:text-white transition-all shadow-2xl flex items-center space-x-2 font-bold"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                        </svg>
-                        <span>Unduh Gambar</span>
-                      </button>
-                   </div>
+                  <div className="absolute bottom-6 right-6 flex space-x-3">
+                    <button
+                      onClick={() => {
+                        const link = document.createElement('a');
+                        link.href = generatedImages[currentImageIndex].url;
+                        link.download = `modelgen-${Date.now()}.png`;
+                        link.click();
+                      }}
+                      className="bg-white/95 backdrop-blur-md p-4 rounded-2xl text-blue-600 hover:bg-blue-600 hover:text-white transition-all shadow-2xl flex items-center space-x-2 font-bold"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      </svg>
+                      <span>Unduh Gambar</span>
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <div className="text-center text-gray-400 max-w-md px-10">
@@ -177,13 +177,13 @@ const App: React.FC = () => {
                 </div>
               )}
             </div>
-            
+
             {generatedImages.length > 0 && (
               <div className="p-5 bg-white border-t border-gray-100 flex overflow-x-auto space-x-4 scrollbar-hide">
                 {generatedImages.map((img, idx) => (
-                  <button 
-                    key={img.timestamp} 
-                    onClick={() => setCurrentImageIndex(idx)} 
+                  <button
+                    key={img.timestamp}
+                    onClick={() => setCurrentImageIndex(idx)}
                     className={`flex-shrink-0 w-24 h-24 rounded-2xl overflow-hidden border-4 transition-all hover:scale-105 active:scale-95 ${idx === currentImageIndex ? 'border-blue-500 shadow-lg shadow-blue-100' : 'border-transparent opacity-50'}`}
                   >
                     <img src={img.url} className="w-full h-full object-cover" alt="thumbnail" />
@@ -196,14 +196,14 @@ const App: React.FC = () => {
 
         {/* Configuration Sidebar */}
         <div className="lg:col-span-5 xl:col-span-4 space-y-6 lg:order-1 lg:max-h-[calc(100vh-140px)] lg:overflow-y-auto lg:pr-2 pb-24 lg:pb-4 custom-scrollbar">
-          
+
           {/* Reference Image Section */}
           <section className="bg-white rounded-3xl shadow-sm border border-gray-200 p-6 space-y-5">
             <h2 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em]">1. Gambar Referensi (Opsional)</h2>
             <div className="space-y-4">
               {!sourceImagePreview ? (
-                <div 
-                  onClick={() => fileInputRef.current?.click()} 
+                <div
+                  onClick={() => fileInputRef.current?.click()}
                   className="border-2 border-dashed border-gray-100 rounded-2xl p-8 text-center cursor-pointer hover:border-blue-200 hover:bg-blue-50/30 transition-all group relative overflow-hidden"
                 >
                   <div className="relative z-10">
@@ -218,8 +218,8 @@ const App: React.FC = () => {
                 <div className="relative rounded-2xl overflow-hidden border border-gray-100 group">
                   <img src={sourceImagePreview} alt="referensi" className="w-full h-40 object-cover" />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <button 
-                      onClick={() => { setSourceImage(null); setSourceImagePreview(null); }} 
+                    <button
+                      onClick={() => { setSourceImage(null); setSourceImagePreview(null); }}
                       className="bg-red-500 text-white p-3 rounded-full hover:scale-110 transition-transform"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -238,9 +238,9 @@ const App: React.FC = () => {
             <div className="space-y-4">
               <div className="space-y-1.5">
                 <label className="text-[11px] font-bold text-gray-500 ml-1">Kategori Utama</label>
-                <select 
-                  value={productConfig.category} 
-                  onChange={(e) => setProductConfig({...productConfig, category: e.target.value})} 
+                <select
+                  value={productConfig.category}
+                  onChange={(e) => setProductConfig({ ...productConfig, category: e.target.value })}
                   className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer"
                 >
                   {PRODUCT_CATEGORIES.map(opt => <option key={opt} value={opt}>{opt}</option>)}
@@ -249,20 +249,20 @@ const App: React.FC = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 ml-1">Warna</label>
-                  <input 
-                    type="text" 
-                    value={productConfig.color} 
-                    onChange={(e) => setProductConfig({...productConfig, color: e.target.value})} 
+                  <input
+                    type="text"
+                    value={productConfig.color}
+                    onChange={(e) => setProductConfig({ ...productConfig, color: e.target.value })}
                     className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all"
                     placeholder="Warna Produk"
                   />
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 ml-1">Material</label>
-                  <input 
-                    type="text" 
-                    value={productConfig.material} 
-                    onChange={(e) => setProductConfig({...productConfig, material: e.target.value})} 
+                  <input
+                    type="text"
+                    value={productConfig.material}
+                    onChange={(e) => setProductConfig({ ...productConfig, material: e.target.value })}
                     className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all"
                     placeholder="Material"
                   />
@@ -270,11 +270,11 @@ const App: React.FC = () => {
               </div>
               <div className="space-y-1.5">
                 <label className="text-[11px] font-bold text-gray-500 ml-1">Keterangan Khusus</label>
-                <textarea 
-                  value={productConfig.description} 
-                  onChange={(e) => setProductConfig({...productConfig, description: e.target.value})} 
-                  className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium h-24 resize-none focus:ring-2 focus:ring-blue-500 transition-all" 
-                  placeholder="Contoh: Tekstur kulit berbutir halus, logo emas di tengah, kemasan elegan dengan uap..." 
+                <textarea
+                  value={productConfig.description}
+                  onChange={(e) => setProductConfig({ ...productConfig, description: e.target.value })}
+                  className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium h-24 resize-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  placeholder="Contoh: Tekstur kulit berbutir halus, logo emas di tengah, kemasan elegan dengan uap..."
                 />
               </div>
             </div>
@@ -286,25 +286,25 @@ const App: React.FC = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <label className="text-[11px] font-bold text-gray-500 ml-1">Gender</label>
-                <select value={modelConfig.gender} onChange={(e) => setModelConfig({...modelConfig, gender: e.target.value})} className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all">
+                <select value={modelConfig.gender} onChange={(e) => setModelConfig({ ...modelConfig, gender: e.target.value })} className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all">
                   {GENDER_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                 </select>
               </div>
               <div className="space-y-1.5">
                 <label className="text-[11px] font-bold text-gray-500 ml-1">Kelompok Usia</label>
-                <select value={modelConfig.age} onChange={(e) => setModelConfig({...modelConfig, age: e.target.value})} className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all">
+                <select value={modelConfig.age} onChange={(e) => setModelConfig({ ...modelConfig, age: e.target.value })} className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all">
                   {AGE_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                 </select>
               </div>
               <div className="space-y-1.5">
                 <label className="text-[11px] font-bold text-gray-500 ml-1">Etnis</label>
-                <select value={modelConfig.ethnicity} onChange={(e) => setModelConfig({...modelConfig, ethnicity: e.target.value})} className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all">
+                <select value={modelConfig.ethnicity} onChange={(e) => setModelConfig({ ...modelConfig, ethnicity: e.target.value })} className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all">
                   {ETHNICITY_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                 </select>
               </div>
               <div className="space-y-1.5">
                 <label className="text-[11px] font-bold text-gray-500 ml-1">Rambut</label>
-                <select value={modelConfig.hairStyle} onChange={(e) => setModelConfig({...modelConfig, hairStyle: e.target.value})} className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all">
+                <select value={modelConfig.hairStyle} onChange={(e) => setModelConfig({ ...modelConfig, hairStyle: e.target.value })} className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all">
                   {HAIR_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                 </select>
               </div>
@@ -317,20 +317,20 @@ const App: React.FC = () => {
             <div className="space-y-4">
               <div className="space-y-1.5">
                 <label className="text-[11px] font-bold text-gray-500 ml-1">Interaksi Produk</label>
-                <select value={sceneConfig.interactionType} onChange={(e) => setSceneConfig({...sceneConfig, interactionType: e.target.value})} className="w-full bg-blue-50 border-0 rounded-xl px-4 py-3 text-sm font-bold text-blue-700 focus:ring-2 focus:ring-blue-500 transition-all">
+                <select value={sceneConfig.interactionType} onChange={(e) => setSceneConfig({ ...sceneConfig, interactionType: e.target.value })} className="w-full bg-blue-50 border-0 rounded-xl px-4 py-3 text-sm font-bold text-blue-700 focus:ring-2 focus:ring-blue-500 transition-all">
                   {INTERACTION_TYPE.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                 </select>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 ml-1">Lokasi</label>
-                  <select value={sceneConfig.environment} onChange={(e) => setSceneConfig({...sceneConfig, environment: e.target.value})} className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all">
+                  <select value={sceneConfig.environment} onChange={(e) => setSceneConfig({ ...sceneConfig, environment: e.target.value })} className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all">
                     {ENVIRONMENT_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                   </select>
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 ml-1">Pencahayaan</label>
-                  <select value={sceneConfig.lighting} onChange={(e) => setSceneConfig({...sceneConfig, lighting: e.target.value})} className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all">
+                  <select value={sceneConfig.lighting} onChange={(e) => setSceneConfig({ ...sceneConfig, lighting: e.target.value })} className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all">
                     {LIGHTING_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
                   </select>
                 </div>
@@ -338,13 +338,13 @@ const App: React.FC = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 ml-1">Aspek Rasio</label>
-                  <select value={sceneConfig.aspectRatio} onChange={(e) => setSceneConfig({...sceneConfig, aspectRatio: e.target.value as AspectRatio})} className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all">
+                  <select value={sceneConfig.aspectRatio} onChange={(e) => setSceneConfig({ ...sceneConfig, aspectRatio: e.target.value as AspectRatio })} className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all">
                     {ASPECT_RATIOS.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
                   </select>
                 </div>
                 <div className="space-y-1.5">
                   <label className="text-[11px] font-bold text-gray-500 ml-1">Kualitas Output</label>
-                  <select value={sceneConfig.resolution} onChange={(e) => setSceneConfig({...sceneConfig, resolution: e.target.value as ImageSize})} className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all">
+                  <select value={sceneConfig.resolution} onChange={(e) => setSceneConfig({ ...sceneConfig, resolution: e.target.value as ImageSize })} className="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 text-sm font-medium focus:ring-2 focus:ring-blue-500 transition-all">
                     {RESOLUTION_OPTIONS.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
                   </select>
                 </div>
@@ -364,9 +364,9 @@ const App: React.FC = () => {
 
           {/* Action Button */}
           <div className="fixed lg:relative bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-md lg:bg-transparent border-t lg:border-t-0 z-40 lg:p-0">
-            <button 
-              onClick={handleGenerate} 
-              disabled={isGenerating} 
+            <button
+              onClick={handleGenerate}
+              disabled={isGenerating}
               className={`w-full py-5 px-8 rounded-3xl font-black text-lg transition-all flex items-center justify-center space-x-3 shadow-2xl ${isGenerating ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700 active:scale-[0.98] shadow-blue-200'}`}
             >
               {isGenerating ? (
